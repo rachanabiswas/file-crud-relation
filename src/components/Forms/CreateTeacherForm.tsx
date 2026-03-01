@@ -7,6 +7,13 @@ import { Controller, useForm } from "react-hook-form";
 import { Button } from "../shadcnui/button";
 import { Field, FieldError, FieldLabel } from "../shadcnui/field";
 import { Input } from "../shadcnui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../shadcnui/select";
 
 const CreateTeacherForm = () => {
   const {
@@ -59,6 +66,33 @@ const CreateTeacherForm = () => {
               placeholder="Enter your full name"
               autoComplete="given-name"
             />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+
+      <Controller
+        name="subject"
+        control={control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor={field.name}>Subjects</FieldLabel>
+            <Select
+              name={field.name}
+              value={field.value}
+              onValueChange={field.onChange}>
+              <SelectTrigger
+                id={field.name}
+                aria-invalid={fieldState.invalid}
+                className="w-full">
+                <SelectValue placeholder="Select a subject" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="English">English</SelectItem>
+                <SelectItem value="Bengali">Bengali</SelectItem>
+                <SelectItem value="Math">Math</SelectItem>
+              </SelectContent>
+            </Select>
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>
         )}
