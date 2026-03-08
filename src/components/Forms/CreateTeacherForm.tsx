@@ -1,9 +1,12 @@
 "use client";
 
 import { TeacherFormSchema, teacherFormSchema } from "@/lib/zodSchema";
+import createTeacher from "@/server/createTeacher";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderIcon, SendIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { Button } from "../shadcnui/button";
 import { Field, FieldError, FieldLabel } from "../shadcnui/field";
 import { Input } from "../shadcnui/input";
@@ -16,13 +19,15 @@ import {
 } from "../shadcnui/select";
 
 const CreateTeacherForm = () => {
+  const { push } = useRouter();
+
   const {
     handleSubmit,
     control,
     formState: { isSubmitting },
     reset,
-    setValue,
-    clearErrors,
+    // setValue,
+    // clearErrors,
   } = useForm({
     resolver: zodResolver(teacherFormSchema),
     defaultValues: {
@@ -33,19 +38,19 @@ const CreateTeacherForm = () => {
   });
 
   const submitHandeler = async (data: TeacherFormSchema) => {
-    // const { isSuccess, message } = await createUser(data);
+    const { isSuccess, message } = await createTeacher(data);
 
     await new Promise((r) => setTimeout(r, 1000));
 
-    // if (isSuccess) {
-    //   toast.success(message);
+    if (isSuccess) {
+      toast.success(message);
 
-    //   reset();
+      reset();
 
-    //   push("/");
-    // } else {
-    //   toast.error(message);
-    // }
+      push("/create");
+    } else {
+      toast.error(message);
+    }
   };
 
   return (
