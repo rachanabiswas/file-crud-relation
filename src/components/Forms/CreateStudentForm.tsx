@@ -1,10 +1,13 @@
 "use client";
 
 import { StudentFormSchema, studentFormSchema } from "@/lib/zodSchema";
+import createStudent from "@/server/createStudent";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderIcon, SendIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { Teacher } from "../../../generated/prisma/client";
 import { Button } from "../shadcnui/button";
 import { Field, FieldError, FieldLabel } from "../shadcnui/field";
 import { Input } from "../shadcnui/input";
@@ -16,7 +19,11 @@ import {
   SelectValue,
 } from "../shadcnui/select";
 
-const CreateStudentForm = () => {
+type CreateStudentFormProps = {
+  teacherList: Teacher[];
+};
+
+const CreateStudentForm = ({ teacherList }: CreateStudentFormProps) => {
   const { push } = useRouter();
 
   const {
@@ -38,19 +45,19 @@ const CreateStudentForm = () => {
   });
 
   const submitHandeler = async (data: StudentFormSchema) => {
-    // const { isSuccess, message } = await createTeacher(data);
+    const { isSuccess, message } = await createStudent(data);
 
     await new Promise((r) => setTimeout(r, 1000));
 
-    // if (isSuccess) {
-    //   toast.success(message);
+    if (isSuccess) {
+      toast.success(message);
 
-    //   reset();
+      reset();
 
-    //   push("/create");
-    // } else {
-    //   toast.error(message);
-    // }
+      push("/");
+    } else {
+      toast.error(message);
+    }
   };
 
   return (
@@ -137,9 +144,13 @@ const CreateStudentForm = () => {
                 <SelectValue placeholder="Select a teacher" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="English">English</SelectItem>
-                <SelectItem value="Bengali">Bengali</SelectItem>
-                <SelectItem value="Math">Math</SelectItem>
+                {teacherList.map(({ id, name, subject }) => (
+                  <SelectItem
+                    key={id}
+                    value={id}>
+                    {`${name} (${subject})`}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
