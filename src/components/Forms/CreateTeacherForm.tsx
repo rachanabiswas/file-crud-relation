@@ -93,9 +93,11 @@ const CreateTeacherForm = () => {
                 <SelectValue placeholder="Select a subject" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="English">English</SelectItem>
-                <SelectItem value="Bengali">Bengali</SelectItem>
-                <SelectItem value="Math">Math</SelectItem>
+                <SelectItem value="English">Bengali</SelectItem>
+                <SelectItem value="Bengali">English</SelectItem>
+                <SelectItem value="Bengali">Math</SelectItem>
+                <SelectItem value="Bengali">Geography</SelectItem>
+                <SelectItem value="Math">History</SelectItem>
               </SelectContent>
             </Select>
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
