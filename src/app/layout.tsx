@@ -1,6 +1,6 @@
 import Header from "@/components/Header/Header";
 import ThemeProvider from "@/components/Providers/ThemeProvider";
-import { geistMono, geistSans } from "@/lib/fonts";
+import { fontMono, fontSans, fontSerif } from "@/lib/fonts";
 import { ReactNode } from "react";
 import "./globals.css";
 
@@ -12,7 +12,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable} antialiased`}
       suppressHydrationWarning>
       <body>
         <ThemeProvider

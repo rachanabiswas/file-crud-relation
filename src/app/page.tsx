@@ -3,8 +3,8 @@ import prisma from "@/lib/database/dbClient";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Next.js Starter Fullstack",
-  description: "Production grade Fullstack Next.js starter template",
+  title: "All Students | File Relation CRUD",
+  description: "All students page of File Relation CRUD application",
 };
 
 const page = async () => {

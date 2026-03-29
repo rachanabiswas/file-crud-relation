@@ -8,8 +8,8 @@ import {
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Create Teacher | User CRUD",
-  description: "Create teacher page of User CRUD application",
+  title: "Create Teacher | File Relation CRUD",
+  description: "Create teacher page of File Relation CRUD application",
 };
 
 const page = () => {

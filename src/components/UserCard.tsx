@@ -1,4 +1,5 @@
 import { StudentGetPayload } from "../../generated/prisma/models";
+import { Badge } from "./shadcnui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "./shadcnui/card";
 
 type UserCardProps = {
@@ -34,7 +35,7 @@ const UserCard = ({ stuData }: UserCardProps) => {
         <div className="col-span-3">{stuData.gender}</div>
         <div className="col-span-1">Teacher</div>
         <div className="col-span-3">
-          {stuData.teacher.name} ({stuData.teacher.subject})
+          {stuData.teacher.name} <Badge>{stuData.teacher.subject}</Badge>
         </div>
       </CardContent>
     </Card>

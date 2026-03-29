@@ -9,8 +9,8 @@ import prisma from "@/lib/database/dbClient";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Create Student | User CRUD",
-  description: "Create student page of User CRUD application",
+  title: "Create Student | File Relation CRUD",
+  description: "Create student page of File Relation CRUD application",
 };
 
 const page = async () => {
